@@ -1,3 +1,4 @@
+const prompt = require("prompt-sync")();
 /***
  * Include commented pseudocode to break down the logic for what you
 are trying to accomplish in each example.
@@ -34,22 +35,13 @@ function select_Subcription(sub_type, user_info)
             }
 }
 // Checkout books
-function CheckoutBooks(){bookname, user}
+function CheckoutBooks(bookname, user)
 {
     user = {name:"xxx", book:""}
     user.book = bookname;
 }
-// List books
-function getBooks(){
-    books = [
-        'Othello',
-        'Hamilton',
-        'Pride and Prejudice',
-        'Monk who sold his ferrari',
-        'Sherlock Holmes'
-    ]
-    return books;
-}
+
+
 // function show book info
 function getBookInfo(id){
     book = {id:123232, name:"Penguins in Madagascar",author:"David",Year:2002}
@@ -60,4 +52,58 @@ function getBookInfo(id){
         return "Book not Found!";
     }
 }
+
+
+function createUserProfile(username, email)
+{
+    let user = {'name':username, 'email':email};
+    return user;
+}
+// List books
+function fetchBookList()
+    {
+        let bookList = [
+            {genre: 'Romance',title:'Pride and Prejudice' ,author: 'Jane Austen'},
+            {genre: 'Mystery',title:'The Locked Room ',author: 'Edgar Allan Poe'},
+            {genre:  'Fantasy',title:'The Hobbit', author:'J.R.R. Tolkien'},
+            {genre: 'Science Fiction',title: 'Dune',author:'Frank Herbert'},
+                     
+       ]
+       return bookList;
+    }
+
+while(true)
+    {
+        console.log(`*********************************\nWELCOME TO THE E-READING PLATFORM\n*********************************`);
+        let option = prompt('Do you want to continue or exit? ');
+        if(option == 'continue')
+            {
+                let user_name = prompt(`Please create a user account,enter your name: `);
+                let email = prompt('Enter your email: ');
+                let userInfo = createUserProfile(user_name,email);
+
+                if(userInfo !=null){
+                    console.log(`Hello, ${userInfo.name} !`);
+                    let view_books = prompt("Would you like to view a list of available books ? Yes or No : ");
+                    if(view_books.toLowerCase() == 'yes')
+                        {
+                                let all_books = fetchBookList();
+                                console.log(`Name\t\t\tGenre\t\t\tAuthor\n------------------------------------------------------`);
+                                for (book of all_books)
+                                {
+                                    console.log(`${book.title}\t${book.genre}\t\t\t${book.author}\n`);
+                                    
+                                }
+                                let choice = prompt("Enter the book name would like to read: ");
+                        }
+                    else 
+                    {
+                        break;
+                    }
+                }
+            }
+        else{
+            break;
+        }
+    }
 
